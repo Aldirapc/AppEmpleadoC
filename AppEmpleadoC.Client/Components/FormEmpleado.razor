@@ -1,6 +1,4 @@
-﻿@page "/formEmpleado"
-@inject NavigationManager navigationManager
-<h3>EmpleadoFormPage</h3>
+﻿@inject NavigationManager navigationManager
 
 <EditForm Model="@oEmpleadoFormCLS">
     <DataAnnotationsValidator />
@@ -52,7 +50,6 @@
         <button type="button" class="btn btn-danger" @onclick="@regresar">Regresar</button>
     </div>
 </EditForm>
-
 @code {
     public EmpleadoFormCLS oEmpleadoFormCLS { get; set; } = new EmpleadoFormCLS();
     private void Guardar()
@@ -65,4 +62,3 @@
     }
 
 }
-
