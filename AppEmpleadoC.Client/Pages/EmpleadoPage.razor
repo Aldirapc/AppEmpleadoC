@@ -3,6 +3,7 @@
 @using AppEmpleadosC.Entities
 @inject NavigationManager navigationManager
 <h3>Empleado page</h3>
+<button @onclick="navegar" class="btn btn-primary">Navegar a Form Empleado</button>
 @if(lista != null && lista.Count !=0)
 {
     <table class="table">
@@ -41,9 +42,9 @@
     public List<EmpleadoListCLS> lista { get; set; } = new List<EmpleadoListCLS>();
     protected override Task OnInitializedAsync()
     {
-        lista.Add(new EmpleadoListCLS { Num_Empl=1 , Nombre="Juan Perez", Cargo="Administrador" });
-        lista.Add(new EmpleadoListCLS { Num_Empl = 1, Nombre = "Rosa Mamani", Cargo = "Asistente" });
-        lista.Add(new EmpleadoListCLS { Num_Empl = 1, Nombre = "Julian Apaza", Cargo = "Administrador" });
+        lista.Add(new EmpleadoListCLS { Num_Empl= 1 , Nombre="Juan Perez", Cargo="Administrador" });
+        lista.Add(new EmpleadoListCLS { Num_Empl = 2, Nombre = "Rosa Mamani", Cargo = "Asistente" });
+        lista.Add(new EmpleadoListCLS { Num_Empl = 3, Nombre = "Julian Apaza", Cargo = "Administrador" });
         return base.OnInitializedAsync();
     }
     private void navegar()
