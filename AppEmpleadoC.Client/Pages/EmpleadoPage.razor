@@ -1,9 +1,9 @@
-﻿
-@page "/Empleado"
+﻿@page "/Empleado"
 @using AppEmpleadosC.Entities
 @inject NavigationManager navigationManager
-<h3>Empleado page</h3>
-<button @onclick="navegar" class="btn btn-primary">Navegar a Form Empleado</button>
+@inject EmpleadoService EmpleadoService
+<h3>Representantes de ventas</h3>
+<button @onclick="nuevo" class="btn btn-primary">Nuevo Empleado</button>
 @if(lista != null && lista.Count !=0)
 {
     <table class="table">
@@ -42,12 +42,14 @@
     public List<EmpleadoListCLS> lista { get; set; } = new List<EmpleadoListCLS>();
     protected override Task OnInitializedAsync()
     {
-        lista.Add(new EmpleadoListCLS { Num_Empl= 1 , Nombre="Juan Perez", Cargo="Administrador" });
-        lista.Add(new EmpleadoListCLS { Num_Empl = 2, Nombre = "Rosa Mamani", Cargo = "Asistente" });
-        lista.Add(new EmpleadoListCLS { Num_Empl = 3, Nombre = "Julian Apaza", Cargo = "Administrador" });
+        listarEmpleados();
         return base.OnInitializedAsync();
     }
-    private void navegar()
+    private void listarEmpleados()
+    {
+        lista = EmpleadoService.listarEmpleados();
+    }
+    private void nuevo()
     {
         navigationManager.NavigateTo("/formEmpleado");
     }
@@ -57,7 +59,7 @@
     }
     private void eliminarEmpleado(int Num_Empl)
     {
-        var listaQueda = lista.Where(x => x.Num_Empl != Num_Empl).ToList();
-        lista = listaQueda;
+        EmpleadoService.eliminarEmpleado(Num_Empl);
+        listarEmpleados();
     }
 }

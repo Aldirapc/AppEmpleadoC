@@ -1,7 +1,6 @@
 ﻿@page "/formEmpleado/edit/{Num_Empl}"
-<h3>EmpleadoFormEditPage</h3>
-<FormEmpleado/>
+<FormEmpleado Num_Empl="int.Parse(Num_Empl)" />
 @code {
     [Parameter]
-    public string? Num_Empl { get; set; }
+    public string? Num_Empl { get; set; } = null!;
 }
