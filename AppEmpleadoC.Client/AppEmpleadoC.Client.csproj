@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AppEmpleado.Test\AppEmpleado.Test.csproj" />
     <ProjectReference Include="..\AppEmpleadosC.Entities\AppEmpleadosC.Entities.csproj" />
   </ItemGroup>
 

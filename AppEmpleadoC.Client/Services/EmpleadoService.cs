@@ -5,6 +5,12 @@ namespace AppEmpleadoC.Client.Services
 {
     public class EmpleadoService
     {
+        public event Func<string, Task> OnSearch = delegate { return Task.CompletedTask; };
+        public async Task notificarBusqueda(string nombre)
+        {
+            await OnSearch.Invoke(nombre);
+        }
+
         private List<EmpleadoListCLS> lista;
         public EmpleadoService()
         {
@@ -19,6 +25,22 @@ namespace AppEmpleadoC.Client.Services
         {
             return lista;
         }
+
+        public List<EmpleadoListCLS> filtrarEmpleados(string nombre)
+        {
+            List<EmpleadoListCLS> l =  listarEmpleados();  
+            if (nombre=="")
+            {
+                return l;
+            }
+            else
+            {
+                List<EmpleadoListCLS> listafiltrada= l.Where(p => p.Nombre.ToUpper().Contains(nombre.ToUpper())).ToList();  
+                return listafiltrada;
+            }
+
+        }
+
         public void eliminarEmpleado(int Num_Empl)
         {
             var listaQueda = lista.Where(x => x.Num_Empl != Num_Empl).ToList();

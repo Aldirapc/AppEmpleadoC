@@ -3,7 +3,17 @@
 @inject NavigationManager navigationManager
 @inject EmpleadoService EmpleadoService
 <h3>Representantes de ventas</h3>
-<button @onclick="nuevo" class="btn btn-primary">Nuevo Empleado</button>
+<div>
+    <button @onclick="nuevo" class="btn btn-primary">Nuevo Empleado</button>
+</div>
+<div class="input-group">
+    <input type="text" class="form-control" placeholder="Ingrese el nombre del Representante"
+    @bind-value="nombre" @bind-value:event="oninput" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button @onclick="buscar" class="btn btn-outline-dark" type="button">Buscar</button>
+        <button @onclick="limpiar" class="btn btn-outline-danger" type="button">Limpiar</button>
+    </div>
+</div>
 @if(lista != null && lista.Count !=0)
 {
     <table class="table">
@@ -39,11 +49,30 @@
     </table>
 }
 @code {
+    private void limpiar()
+    {
+        nombre = "";
+        lista = EmpleadoService.filtrarEmpleados(nombre);
+    }   
+
+    public string nombre { get; set; } = string.Empty;
+    private void buscar()
+    {
+        lista = EmpleadoService.filtrarEmpleados(nombre);
+    }
     public List<EmpleadoListCLS> lista { get; set; } = new List<EmpleadoListCLS>();
+
     protected override Task OnInitializedAsync()
     {
+        EmpleadoService.OnSearch += filtrar;
         listarEmpleados();
         return base.OnInitializedAsync();
+    }
+    private Task filtrar (string nombre)
+    {
+        lista = EmpleadoService.filtrarEmpleados(nombre);
+        StateHasChanged();
+        return Task.CompletedTask;
     }
     private void listarEmpleados()
     {

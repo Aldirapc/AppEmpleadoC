@@ -30,5 +30,7 @@ namespace AppEmpleadoC.Entities
         [Required(ErrorMessage = "Las ventas son obligatorias")]
         [Range(0, double.MaxValue, ErrorMessage = "Las ventas deben ser un número válido")]
         public decimal Ventas { get; set; }
+        public int idSucursal { get; set; }
+        public int idDirector { get; set; } 
     }
 }
