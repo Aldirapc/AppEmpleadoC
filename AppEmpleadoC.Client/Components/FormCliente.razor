@@ -1,0 +1,63 @@
+﻿@inject NavigationManager navigationManager
+@inject ClienteService clienteService
+
+@using AppEmpleadosC.Entities;
+<h3>@Titulo</h3>
+<EditForm Model="@oClienteFormCLS" OnValidSubmit="@guardar">
+    <DataAnnotationsValidator />
+    <div class="mt-3">
+        <label>Número de Cliente</label>
+        <InputNumber class="form-control" @bind-Value="oClienteFormCLS.CodigoCliente" />
+        <ValidationMessage For="@(() => oClienteFormCLS.CodigoCliente)" />
+    </div>
+    <div class="mt-3">
+        <label>Nombre</label>
+        <InputText class="form-control" @bind-Value="oClienteFormCLS.NombreCliente" />
+        <ValidationMessage For="@(() => oClienteFormCLS.NombreCliente)" />
+    </div>
+    <div class="mt-3">
+        <label>Representante Asignado</label>
+        <InputText class="form-control" @bind-Value="oClienteFormCLS.Representante" />
+        <ValidationMessage For="@(() => oClienteFormCLS.Representante)" />
+    </div>
+    <div class="mt-3">
+        <label>Limite de Credito</label>
+        <InputNumber class="form-control" @bind-Value="oClienteFormCLS.LimiteCredito" />
+        <ValidationMessage For="@(() => oClienteFormCLS.LimiteCredito)" />
+    </div>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-success" @onclick="@guardar">Guardar</button>
+        <button type="button" class="btn btn-danger" @onclick="@regresar">Regresar</button>
+    </div>
+</EditForm>
+
+@code {
+    public ClienteFormCLS oClienteFormCLS { get; set; } = new ClienteFormCLS();
+    [Parameter]
+    public int CodigoClient { get; set; }
+
+    public string Titulo { get; set; } = "";
+
+    protected override Task OnInitializedAsync()
+    {
+        if (CodigoClient == 0) Titulo = "Agregar Cliente";
+        else
+        {
+            Titulo = "Editar Cliente";
+            oClienteFormCLS = clienteService.recuperarClientePorId(CodigoClient);
+        }
+        return base.OnInitializedAsync();
+    }
+    private void guardar()
+    {
+        if (Titulo == "Agregar Cliente")
+        {
+            clienteService.guardarCliente(oClienteFormCLS);
+            navigationManager.NavigateTo("/cliente");
+        }
+    }
+    private void regresar()
+    {
+        navigationManager.NavigateTo("/cliente");
+    }
+}

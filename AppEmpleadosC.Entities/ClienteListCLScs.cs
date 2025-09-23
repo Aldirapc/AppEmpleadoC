@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppEmpleadosC.Entities
 {
-    public class ClienteListCLScs
+    public class ClienteListCLS
     {
         public int CodigoCliente { get; set; }
         public string NombreCliente { get; set; } = null!;

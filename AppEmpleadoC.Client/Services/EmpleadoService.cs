@@ -28,14 +28,14 @@ namespace AppEmpleadoC.Client.Services
 
         public List<EmpleadoListCLS> filtrarEmpleados(string nombre)
         {
-            List<EmpleadoListCLS> l =  listarEmpleados();  
+            List<EmpleadoListCLS> l =  listarEmpleados();
             if (nombre=="")
             {
                 return l;
             }
             else
             {
-                List<EmpleadoListCLS> listafiltrada= l.Where(p => p.Nombre.ToUpper().Contains(nombre.ToUpper())).ToList();  
+                List<EmpleadoListCLS> listafiltrada= l.Where(p => p.Nombre.ToUpper().Contains(nombre.ToUpper())).ToList();
                 return listafiltrada;
             }
 
