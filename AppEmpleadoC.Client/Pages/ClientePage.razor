@@ -1,0 +1,10 @@
+﻿@page "/cliente"
+@inject NavigationManager NavigationManager
+<h3>ClientePage</h3>
+<button @onclick="navegar" class="btn btn-primary">NAVEGAR A FORM CLIENTE</button>
+@code {
+    private void navegar() 
+    {
+        NavigationManager.NavigateTo("/formCliente");
+    }   
+}
