@@ -9,6 +9,6 @@ namespace AppEmpleadosC.Entities
     public class SucursalCLS
     {
         public int idSucursal { get; set; } 
-        public string nombreSucursal { get; set; }  
+        public string nombreSucursal { get; set; } = null!;
     }
 }

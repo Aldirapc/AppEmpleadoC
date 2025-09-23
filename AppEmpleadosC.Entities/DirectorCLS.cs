@@ -9,6 +9,6 @@ namespace AppEmpleadosC.Entities
     public class DirectorCLS
     {
         public int idDirector { get; set; } 
-        public string nombreDirector { get; set; }
+        public string nombreDirector { get; set; } = null!;
     }
 }
